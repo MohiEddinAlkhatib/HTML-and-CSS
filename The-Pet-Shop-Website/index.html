@@ -1,0 +1,341 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mohi's Pet Shop</title>
+    <style>
+        /* Unique Playful & Simple Palette */
+        :root {
+            --bg-color: #faf6f0;       /* Warm Cream */
+            --primary-color: #d96a50;  /* Terracotta / Clay */
+            --accent-color: #5f9ea0;   /* Muted Mint / Cadet Blue */
+            --card-bg: #ffffff;        /* Crisp White */
+            --text-dark: #3e322e;      /* Deep Earthy Brown */
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+            font-family: 'Courier New', Courier, monospace, sans-serif; /* Gives a unique, clean, indie feel */
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        body {
+            background-color: var(--bg-color);
+            color: var(--text-dark);
+            line-height: 1.6;
+        }
+
+        /* Sticky Navigation Menu */
+        nav {
+            background-color: var(--primary-color);
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+            padding: 15px 30px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            border-bottom: 4px dashed var(--bg-color); /* Fun, unique border */
+        }
+
+        nav .shop-logo {
+            color: white;
+            font-size: 1.4rem;
+            font-weight: bold;
+        }
+
+        nav ul {
+            display: flex;
+            list-style: none;
+        }
+
+        nav ul li {
+            margin-left: 25px;
+        }
+
+        nav ul li a {
+            color: white;
+            text-decoration: none;
+            font-weight: bold;
+            font-size: 1.1rem;
+            transition: color 0.2s;
+        }
+
+        nav ul li a:hover {
+            color: var(--bg-color);
+            text-decoration: underline;
+        }
+
+        /* Global Section Layout */
+        section {
+            padding: 70px 20px;
+            max-width: 900px;
+            margin: 0 auto;
+            text-align: center;
+        }
+
+        h2 {
+            color: var(--primary-color);
+            font-size: 2.2rem;
+            margin-bottom: 15px;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+        }
+
+        .subtitle {
+            margin-bottom: 40px;
+            font-style: italic;
+            color: #7a6862;
+        }
+
+        /* Home Section */
+        #home-shop {
+            padding-top: 100px;
+        }
+
+        #home-shop h1 {
+            font-size: 3.5rem;
+            color: var(--primary-color);
+            line-height: 1.2;
+            margin-bottom: 20px;
+        }
+
+        #home-shop p {
+            font-size: 1.2rem;
+            max-width: 650px;
+            margin: 0 auto;
+        }
+
+        /* Image Gallery (Actual Pets) */
+        .pet-gallery {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 25px;
+            justify-content: center;
+        }
+
+        .pet-card {
+            background: var(--card-bg);
+            border: 3px solid var(--text-dark); /* Quirky hard borders */
+            border-radius: 12px;
+            overflow: hidden;
+            width: 260px;
+            box-shadow: 5px 5px 0px var(--text-dark); /* Retro shadow effect */
+        }
+
+        .pet-card img {
+            width: 100%;
+            height: 200px;
+            object-fit: cover;
+            border-bottom: 3px solid var(--text-dark);
+        }
+
+        .pet-info {
+            padding: 15px;
+        }
+
+        .pet-info h3 {
+            color: var(--primary-color);
+            margin-bottom: 5px;
+        }
+
+        /* Video Section */
+        .video-wrapper {
+            max-width: 700px;
+            margin: 0 auto;
+            border: 3px solid var(--text-dark);
+            border-radius: 12px;
+            overflow: hidden;
+            box-shadow: 6px 6px 0px var(--accent-color);
+            position: relative;
+            padding-bottom: 56.25%; /* 16:9 ratio */
+            height: 0;
+        }
+
+        .video-wrapper iframe {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+        }
+
+        /* Contact Form */
+        form {
+            background: var(--card-bg);
+            border: 3px solid var(--text-dark);
+            border-radius: 12px;
+            padding: 30px;
+            max-width: 550px;
+            margin: 0 auto;
+            text-align: left;
+            box-shadow: 5px 5px 0px var(--text-dark);
+        }
+
+        .form-field {
+            margin-bottom: 20px;
+        }
+
+        form label {
+            display: block;
+            margin-bottom: 8px;
+            font-weight: bold;
+            color: var(--text-dark);
+        }
+
+        form input, form textarea {
+            width: 100%;
+            padding: 12px;
+            border: 2px solid var(--text-dark);
+            border-radius: 6px;
+            font-size: 1rem;
+            background-color: var(--bg-color);
+        }
+
+        form input:focus, form textarea:focus {
+            outline: none;
+            background-color: white;
+            border-color: var(--primary-color);
+        }
+
+        form button {
+            background-color: var(--accent-color);
+            color: white;
+            border: 2px solid var(--text-dark);
+            padding: 12px 25px;
+            font-size: 1.1rem;
+            font-weight: bold;
+            border-radius: 6px;
+            cursor: pointer;
+            width: 100%;
+            box-shadow: 3px 3px 0px var(--text-dark);
+            transition: all 0.1s;
+        }
+
+        form button:hover {
+            transform: translate(-2px, -2px);
+            box-shadow: 5px 5px 0px var(--text-dark);
+        }
+
+        form button:active {
+            transform: translate(2px, 2px);
+            box-shadow: 1px 1px 0px var(--text-dark);
+        }
+
+        /* Footer */
+        footer {
+            background-color: var(--text-dark);
+            color: var(--bg-color);
+            text-align: center;
+            padding: 30px 20px;
+            margin-top: 60px;
+            font-size: 0.9rem;
+        }
+
+        footer p a {
+            color: var(--accent-color);
+            text-decoration: none;
+        }
+    </style>
+</head>
+<body>
+
+    <nav>
+        <div class="shop-logo">🐾 Mohi's Pet Shop</div>
+        <ul>
+            <li><a href="#home-shop">Welcome</a></li>
+            <li><a href="#meet-pets">Our Pets</a></li>
+            <li><a href="#pet-tv">Pet TV</a></li>
+            <li><a href="#adopt-form">Adopt / Visit</a></li>
+        </ul>
+    </nav>
+
+    <section id="home-shop">
+        <h1>Where Happy Paws <br>Find Happy Homes</h1>
+        <p>Hi there! I'm Mohi eddin AlKhatib, and welcome to my boutique pet corner. We pair incredible, healthy animals with loving families. Dive into our gallery below to meet our current residents!</p>
+    </section>
+
+    <section id="meet-pets">
+        <h2>Meet Our Best Friends</h2>
+        <p class="subtitle">Clicking the links above will bring you straight to our adoption applications.</p>
+        
+        <div class="pet-gallery">
+            <div class="pet-card">
+                <img src="https://images.unsplash.com/photo-1543466835-00a7907e9de1?q=80&w=500&auto=format&fit=crop" alt="Happy golden retriever puppy sitting down">
+                <div class="pet-info">
+                    <h3>Milo</h3>
+                    <p>Golden Retriever</p>
+                    <p style="font-size: 0.85rem; margin-top: 5px; color: #666;">Age: 3 Months</p>
+                </div>
+            </div>
+
+            <div class="pet-card">
+                <img src="https://images.unsplash.com/photo-1514888286974-6c03e2ca1dba?q=80&w=500&auto=format&fit=crop" alt="Close up portrait of a ginger cat looking sideways">
+                <div class="pet-info">
+                    <h3>Cleo</h3>
+                    <p>Domestic Shorthair</p>
+                    <p style="font-size: 0.85rem; margin-top: 5px; color: #666;">Age: 1 Year</p>
+                </div>
+            </div>
+
+            <div class="pet-card">
+                <img src="https://images.unsplash.com/photo-1522856283742-f3914952d64a?q=80&w=500&auto=format&fit=crop" alt="Small fluffy white hamster sitting on wooden shavings">
+                <div class="pet-info">
+                    <h3>Pip</h3>
+                    <p>Dwarf Hamster</p>
+                    <p style="font-size: 0.85rem; margin-top: 5px; color: #666;">Age: 6 Months</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="pet-tv">
+        <h2>Pet Relaxation Lounge</h2>
+        <p class="subtitle">Take a moment to enjoy some soothing nature footage curated for our shop's kittens and puppies.</p>
+        <div class="video-wrapper">
+            <iframe src="https://www.youtube.com/embed/7A8mPZp9U3Y" title="Relaxing Pet Video" allowfullscreen></iframe>
+        </div>
+    </section>
+
+    <section id="adopt-form">
+        <h2>Plan a Visit / Inquire</h2>
+        <p class="subtitle">Want to meet Milo, Cleo, or Pip? Drop Mohi eddin a line right here.</p>
+        
+        <form action="#" method="POST" onsubmit="event.preventDefault(); alert('Paw-fect! Mohi will get back to you shortly.');">
+            <div class="form-field">
+                <label for="visitor-name">Your Full Name:</label>
+                <input type="text" id="visitor-name" name="visitor-name" required placeholder="Jane Doe">
+            </div>
+            
+            <div class="form-field">
+                <label for="visitor-email">Your Email Address:</label>
+                <input type="email" id="visitor-email" name="visitor-email" required placeholder="jane@example.com">
+            </div>
+
+            <div class="form-field">
+                <label for="pet-interest">Which pet are you interested in?</label>
+                <input type="text" id="pet-interest" name="pet-interest" placeholder="e.g., Milo the Pup">
+            </div>
+            
+            <div class="form-field">
+                <label for="visitor-msg">Your Message:</label>
+                <textarea id="visitor-msg" name="visitor-msg" rows="4" required placeholder="Tell us about your home and layout..."></textarea>
+            </div>
+            
+            <button type="submit">Send Inquiry 🐶</button>
+        </form>
+    </section>
+
+    <footer>
+        <p>&copy; 2026 Mohi eddin AlKhatib | The Pet Shop Project</p>
+        <p style="margin-top: 10px; font-size: 0.8rem; opacity: 0.7;">Images sourced from Unsplash. Videos sourced from YouTube.</p>
+    </footer>
+
+</body>
+</html>
