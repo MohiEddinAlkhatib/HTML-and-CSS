@@ -1,0 +1,397 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>MohiEddin | Developer Portfolio</title>
+    <style>
+        /* CSS RESET & VARIABLES */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        :root {
+            --bg-dark: #0f111a;
+            --bg-card: #171a26;
+            --accent-orange: #ff5722;
+            --accent-teal: #00e5ff;
+            --text-light: #f4f5f7;
+            --text-muted: #94a3b8;
+        }
+
+        html {
+            scroll-behavior: smooth;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background-color: var(--bg-dark);
+            color: var(--text-light);
+        }
+
+        /* FIXED NAVBAR */
+        .navbar {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            background-color: var(--bg-card);
+            border-bottom: 2px solid var(--accent-orange);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 0 2rem;
+            height: 70px;
+            z-index: 1000;
+        }
+
+        .navbar .logo {
+            font-size: 1.5rem;
+            font-weight: bold;
+            color: var(--accent-teal);
+            letter-spacing: 2px;
+        }
+
+        .navbar ul {
+            display: flex;
+            list-style: none;
+        }
+
+        .navbar ul li a {
+            display: block;
+            padding: 1.5rem 1.2rem;
+            color: var(--text-light);
+            text-decoration: none;
+            font-weight: 600;
+            text-transform: uppercase;
+            font-size: 0.9rem;
+            transition: all 0.3s ease;
+        }
+
+        /* Navbar Hover Effect */
+        .navbar ul li a:hover {
+            background-color: rgba(255, 87, 34, 0.1);
+            color: var(--accent-orange);
+            box-shadow: inset 0 -3px 0 var(--accent-orange);
+        }
+
+        /* MAIN CONTENT HOLDER */
+        main {
+            margin-top: 70px; /* Offset for fixed header */
+            padding: 2rem;
+            max-width: 1200px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        /* HERO VIDEO OVERLAY SECTION */
+        .hero-video-container {
+            position: relative;
+            width: 100%;
+            height: 450px;
+            overflow: hidden;
+            border-radius: 12px;
+            margin-bottom: 3rem;
+            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.5);
+        }
+
+        /* Embedded Loop/Muted Video */
+        .hero-video-container video {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        /* Video Text Overlay */
+        .video-overlay-text {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(rgba(15, 17, 26, 0.4), rgba(15, 17, 26, 0.85));
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+            padding: 1rem;
+        }
+
+        .video-overlay-text h1 {
+            font-size: 3.5rem;
+            color: var(--text-light);
+            text-shadow: 0 0 15px var(--accent-orange);
+            margin-bottom: 0.5rem;
+        }
+
+        .video-overlay-text p {
+            font-size: 1.3rem;
+            color: var(--accent-teal);
+        }
+
+        /* SECTION HOVER COMPONENT (Requirement: Paragraph Hover Effect) */
+        .interactive-box {
+            background-color: var(--bg-card);
+            padding: 1.5rem;
+            border-radius: 8px;
+            margin-bottom: 3rem;
+            border-left: 4px solid var(--accent-teal);
+        }
+
+        /* Paragraph Hover effect */
+        .interactive-box p {
+            font-size: 1.1rem;
+            color: var(--text-muted);
+            transition: color 0.3s ease, transform 0.3s ease;
+            cursor: pointer;
+        }
+
+        .interactive-box p:hover {
+            color: var(--accent-orange);
+            transform: translateX(5px);
+        }
+
+        /* TWO-COLUMN LAYOUT */
+        .two-column-section {
+            display: flex;
+            gap: 2rem;
+            margin-bottom: 3rem;
+        }
+
+        /* Height, Width, and Font Color Configurations */
+        .column-left, .column-right {
+            width: 50%;
+            height: 380px; 
+            background-color: var(--bg-card);
+            padding: 2rem;
+            border-radius: 8px;
+            color: var(--text-light); /* Specifying internal text color */
+        }
+
+        .column-left {
+            border-top: 4px solid var(--accent-orange);
+        }
+
+        .column-right {
+            border-top: 4px solid var(--accent-teal);
+        }
+
+        .two-column-section h3 {
+            margin-bottom: 1rem;
+            font-size: 1.5rem;
+            color: var(--text-light);
+        }
+
+        /* STYLED ACCENT IMAGE WITH OVERLAYS & FILTER EFFECTS */
+        .image-showcase {
+            display: flex;
+            flex-direction: column;
+            align-items: center; /* Centering helper container */
+            margin-bottom: 3rem;
+        }
+
+        .image-wrapper {
+            position: relative;
+            width: 320px;
+            height: 320px;
+            margin: 0 auto; /* Centering target */
+            border-radius: 20px; /* Rounded Edges */
+            overflow: hidden;
+            box-shadow: 0 0 20px rgba(0, 229, 255, 0.3);
+        }
+
+        .image-wrapper img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            filter: grayscale(40%) contrast(120%); /* CSS Filter Applied */
+            transition: filter 0.5s ease;
+        }
+
+        /* Static Text Placed Over Image */
+        .static-image-text {
+            position: absolute;
+            top: 15px;
+            left: 15px;
+            background: rgba(15, 17, 26, 0.8);
+            padding: 0.4rem 0.8rem;
+            font-size: 0.8rem;
+            font-weight: bold;
+            color: var(--accent-orange);
+            border-radius: 4px;
+        }
+
+        /* Image Overlay Fade (Interaction layer) */
+        .image-overlay-fade {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(255, 87, 34, 0.9);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            opacity: 0; /* Hidden initially */
+            transition: opacity 0.4s ease;
+            padding: 1rem;
+            text-align: center;
+        }
+
+        .image-overlay-fade p {
+            color: white;
+            font-weight: bold;
+            font-size: 1.2rem;
+        }
+
+        /* Trigger for Overlay Fade & Filter Swap */
+        .image-wrapper:hover .image-overlay-fade {
+            opacity: 1;
+        }
+
+        .image-wrapper:hover img {
+            filter: grayscale(0%) contrast(100%);
+        }
+
+        /* DATA TABLE CUSTOM STYLING */
+        .table-section {
+            margin-bottom: 3rem;
+            overflow-x: auto;
+        }
+
+        .table-section h3 {
+            margin-bottom: 1rem;
+            color: var(--accent-teal);
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            background-color: var(--bg-card);
+            border: 2px solid #2e344e; /* Created Border */
+        }
+
+        th, td {
+            padding: 1rem; /* Added Cell Padding */
+            text-align: left;
+            border: 1px solid #2e344e; /* Grid Borders */
+        }
+
+        /* Background color applied exclusively to the top row */
+        tr:first-child {
+            background-color: var(--accent-orange);
+            color: white;
+        }
+
+        tr:first-child th {
+            font-weight: bold;
+            text-transform: uppercase;
+            font-size: 0.85rem;
+            letter-spacing: 1px;
+        }
+
+        /* STYLED FOOTER */
+        footer {
+            background-color: #090a10;
+            padding: 2rem;
+            border-top: 1px solid #2e344e;
+            margin-top: 4rem;
+        }
+
+        footer p {
+            text-align: center; /* Centered Footer Text */
+            font-weight: bold;   /* Bolded Footer Text */
+            color: var(--text-muted);
+            font-size: 0.95rem;
+        }
+        
+        footer p span {
+            color: var(--accent-teal);
+        }
+    </style>
+</head>
+<body>
+
+    <nav class="navbar">
+        <div class="logo">MOHIEDDIN.TECH</div>
+        <ul>
+            <li><a href="#">Home</a></li>
+            <li><a href="#about">About</a></li>
+            <li><a href="#">Home</a></li> <li><a href="#skills">How To Create a Fixed Menu</a></li>
+        </ul>
+    </nav>
+
+    <main>
+
+        <section class="hero-video-container">
+            <video autoplay muted loop playsinline>
+                <source src="https://cdn.pixabay.com/video/2026/01/08/326677_tiny.mp4" type="video/mp4">
+                Your browser does not support the video tag.
+            </video>
+            <div class="video-overlay-text">
+                <h1>MOHIEDDIN</h1>
+                <p>Student & Tech Innovator</p>
+            </div>
+        </section>
+
+        <section id="about" class="interactive-box">
+            <p>👋 Hover over this paragraph text block! I am a student designer engineering custom web applications. This specific text card changes dynamically to showcase CSS pseudo-element interactive capabilities directly inside the browser canvas.</p>
+        </section>
+
+        <section class="two-column-section">
+            <div class="column-left">
+                <h3>Core Foundations</h3>
+                <p>This panel uses a precise width structural setup matching its sibling asset block. It holds styled data utilizing dark-mode contrast balances ensuring comfortable programmatic reading interfaces.</p>
+            </div>
+            <div class="column-right">
+                <h3>Creative Pursuits</h3>
+                <p>By splitting our interface logic using modern Flexbox calculations, content scales neatly across viewports while retaining explicit layout heights declared within the configuration files.</p>
+            </div>
+        </section>
+
+        <section class="image-showcase">
+            <div class="image-wrapper">
+                <div class="static-image-text">SECURE NODE</div>
+                
+                <img src="https://images.unsplash.com/photo-1550751827-4bd374c3f58b?auto=format&fit=crop&w=600&q=80" alt="Cyberpunk Server Hardware">
+                
+                <div class="image-overlay-fade">
+                    <p>SYSTEM ONLINE<br>Welcome to the Matrix.</p>
+                </div>
+            </div>
+        </section>
+
+        <section id="skills" class="table-section">
+            <h3>Academics & Stack Progression</h3>
+            <table>
+                <tr>
+                    <th>Term Project ID</th>
+                    <th>Language Component</th>
+                    <th>Development Status</th>
+                </tr>
+                <tr>
+                    <td>PRJ-2026-A</td>
+                    <td>Vanilla HTML5 Boilerplates</td>
+                    <td>Production Ready</td>
+                </tr>
+                <tr>
+                    <td>PRJ-2026-B</td>
+                    <td>Advanced Architectural CSS Grid</td>
+                    <td>Optimizing Execution</td>
+                </tr>
+                <tr>
+                    <td>PRJ-2026-C</td>
+                    <td>Bootstrap Framework Integration</td>
+                    <td>Planned Pipeline</td>
+                </tr>
+            </table>
+        </section>
+
+    </main>
+
+    <footer>
+        <p>&copy; 2026 Portfolio Core. Created by <span>MohiEddin</span>. All Rights Reserved.</p>
+    </footer>
+
+</body>
+</html>
